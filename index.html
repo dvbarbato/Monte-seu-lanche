@@ -151,7 +151,27 @@
                     <div class="row mt-2">
                         <div class="col d-flex justify-content-between" >
                             <button type="button" class="btn btn-warning" @click="etapa -= 1" >Voltar para o Lanche</button>
-                            <button type="button" class="btn btn-success" >Confirmar</button>
+                            <button type="button" class="btn btn-success" @click="confirmarPedido()" >Confirmar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6" v-if="etapa == 3">
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">PEDIDO CONFIRMADO</div>
+                                <div class="card-body">
+                                   <P>Agora é só aguardar o pedido ficar pronto</P>
+                                   <p>Vamos chamar você em breve</p>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col d-flex justify-content-between" >
+                            <button type="button" class="btn btn-primary" @click="etapa = 1">Repetir Pedido</button>
+                            <button type="button" class="btn btn-success" @click="novoPedido()">Novo Pedido</button>
                         </div>
                     </div>
                 </div>
@@ -235,8 +255,28 @@
                     }else {
                         alert('Você precisa selecionar um pão e um hamburger')
                     }
+                },
+                confirmarPedido() {
+                    if(this.inputNome && this.inputEndereco) {
+                        this.etapa = 3
+
+                        setTimeout(() => this.novoPedido(), 7000)
+
+                    }else {
+                        alert('Você precisa informar o seu nome e endereço')
+                    }
+                },
+                novoPedido() {
+                    this.etapa = 1
+                    this.inputTipoPao= ''
+                    this.inputSalada= []
+                    this.inputMolhos= []
+                    this.inputTipoHamburger= ''
+                    this.inputNome= ''
+                    this.inputEndereco= ''
                 }
             },
+
 
         })
     </script>
